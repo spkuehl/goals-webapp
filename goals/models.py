@@ -37,7 +37,7 @@ class Goal(models.Model):
     reminder_notification_time = models.TimeField(blank=True, null=True)
 
     active = models.BooleanField(default=True)
-    archive = models.BooleanField(default=False)
+    archived = models.BooleanField(default=False)
 
     def total_duration_complete(self):
         logs = GoalLog.objects.filter(goal=self)
@@ -52,6 +52,11 @@ class Goal(models.Model):
     @property
     def activate(self):
         self.active = True
+        self.save()
+
+    @property
+    def archive(self):
+        self.archived = True
         self.save()
 
 

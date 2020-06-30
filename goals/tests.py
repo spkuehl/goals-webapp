@@ -13,7 +13,7 @@ def test_user_create():
 
 # GOAL unit tests
 @pytest.mark.django_db
-def test_goal_create(django_user_model):
+def test_create_goal(django_user_model):
     user = django_user_model.objects.create(
         username='someone', password='password'
         )
@@ -29,7 +29,7 @@ def test_goal_create(django_user_model):
     assert len(Goal.objects.all()) == 1
 
 @pytest.mark.django_db
-def test_goal_deactivate_goal(django_user_model):
+def test_deactivate_goal(django_user_model):
     user = django_user_model.objects.create(
         username='someone', password='password'
         )
@@ -46,7 +46,7 @@ def test_goal_deactivate_goal(django_user_model):
     assert Goal.objects.first().active == False
 
 @pytest.mark.django_db
-def test_goal_reactivate_goal(django_user_model):
+def test_reactivate_goal(django_user_model):
     user = django_user_model.objects.create(
         username='someone', password='password'
         )
@@ -63,9 +63,26 @@ def test_goal_reactivate_goal(django_user_model):
     goal.activate
     assert Goal.objects.first().active == True
 
+@pytest.mark.django_db
+def test_archive_goal(django_user_model):
+    user = django_user_model.objects.create(
+        username='someone', password='password'
+        )
+    name = 'Creative Writing'
+    description = 'Write creatively 3x a week for the next 3 months.'
+    end_date = datetime.datetime.now() + datetime.timedelta(days=90)
 
-# Deactivate Goal
-# Archive Goal
+    goal = Goal(user=user,
+                name=name,
+                description=description,
+                end_date=end_date,
+                active=False)
+    goal.save()
+    goal.archive
+    assert Goal.objects.first().archived == True
+
+
+
 # Get total duration (hours worked)
 
 # GOAL LOG unit tests
