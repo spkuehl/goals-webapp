@@ -39,6 +39,11 @@ class Goal(models.Model):
     active = models.BooleanField(default=True)
     archive = models.BooleanField(default=False)
 
+    def total_duration_complete(self):
+        logs = GoalLog.objects.filter(goal=self)
+        total_hours_list = [log.duration_complete for log in logs]
+        return sum(total_hours_list)
+
 
 class GoalLog(models.Model):
     '''
@@ -51,7 +56,7 @@ class GoalLog(models.Model):
     start_time  = models.DateTimeField(null=True, blank=True)
     end_time  = models.DateTimeField(null=True, blank=True)
 
-    def duration(self):
+    def duration_complete(self):
         if self.start_time and self.end_time:
             dur = self.end_time - self.start_time
             return dur.hours
