@@ -44,6 +44,16 @@ class Goal(models.Model):
         total_hours_list = [log.duration_complete for log in logs]
         return sum(total_hours_list)
 
+    @property
+    def deactivate(self):
+        self.active = False
+        self.save()
+
+    @property
+    def activate(self):
+        self.active = True
+        self.save()
+
 
 class GoalLog(models.Model):
     '''
