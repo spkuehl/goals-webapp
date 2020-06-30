@@ -47,6 +47,7 @@ class GoalLog(models.Model):
           See about validating end_time > start_time.
     '''
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
+    notes =models.TextField(blank=True, null=True)
     start_time  = models.DateTimeField(null=True, blank=True)
     end_time  = models.DateTimeField(null=True, blank=True)
 
