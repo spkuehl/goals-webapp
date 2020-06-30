@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
+
 class Goal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
@@ -38,3 +38,21 @@ class Goal(models.Model):
 
     active = models.BooleanField(default=True)
     archive = models.BooleanField(default=False)
+
+
+class GoalLog(models.Model):
+    '''
+    todo: Test duration method.
+          Ensure GoalLog is only made by Goal owner.
+          See about validating end_time > start_time.
+    '''
+    goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
+    start_time  = models.DateTimeField(null=True, blank=True)
+    end_time  = models.DateTimeField(null=True, blank=True)
+
+    def duration(self):
+        if self.start_time and self.end_time:
+            dur = self.end_time - self.start_time
+            return dur.hours
+        else:
+            return None
