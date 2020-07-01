@@ -65,15 +65,20 @@ class GoalLog(models.Model):
     todo: Test duration method.
           Ensure GoalLog is only made by Goal owner.
           See about validating end_time > start_time.
+          Find interaction when time and direct input methods exist.
     '''
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
     notes =models.TextField(blank=True, null=True)
     start_time  = models.DateTimeField(null=True, blank=True)
     end_time  = models.DateTimeField(null=True, blank=True)
+    duration_direct_input = models.PositiveIntegerField(null=True, blank=True,
+        help_text='Direclty input duration in minutes.')
 
     def duration_complete(self):
-        if self.start_time and self.end_time:
+        if self.duration_direct_input:
+            return self.duration_direct_input
+        elif self.start_time and self.end_time:
             dur = self.end_time - self.start_time
-            return dur.hours
+            return dur.minutes
         else:
             return None

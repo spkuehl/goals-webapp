@@ -35,5 +35,8 @@ def test_create_goallog(django_user_model):
 # Edit GoalLog.start_time
 # Add GoalLog.end_time
 # Edit GoalLog.end_time
+# Add direct input
+# Edit direct input
 # Get GoalLog duration == None if no start & end time.
 # Get GoalLog duration if start & end time.
+# Get GoalLog duration from direct input

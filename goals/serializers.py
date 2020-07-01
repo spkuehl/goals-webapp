@@ -15,4 +15,5 @@ class GoalSerializer(serializers.ModelSerializer):
 class GoalLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = GoalLog
-        fields = ['id', 'goal', 'notes', 'start_time', 'end_time']
+        fields = ['id', 'goal', 'notes', 'start_time', 'end_time',
+                  'duration_direct_input']
