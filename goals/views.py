@@ -26,18 +26,15 @@ class GoalViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-# CRUD GoalLogs
-# class GoalLogViewSet(viewsets.ModelViewSet):
-#     """
-#     This viewset automatically provides `list`, `create`, `retrieve`,
-#     `update` and `destroy` actions.
-#     """
-#     queryset = GoalLog.objects.all()
-#     serializer_class = GoalLogSerializer
-#     permission_classes = [IsAuthenticated]
-#
-#     def get_queryset(self):
-#         return GoalLog.objects.filter(goal_user=self.request.user)
-#
-#     def perform_create(self, serializer):
-#         serializer.save(user=self.request.user)
+
+class GoalLogViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
+    """
+    queryset = GoalLog.objects.all()
+    serializer_class = GoalLogSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return GoalLog.objects.filter(goal__user=self.request.user)

@@ -21,6 +21,7 @@ from goals import views
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'goals', views.GoalViewSet)
+router.register(r'goal-logs', views.GoalLogViewSet)
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
