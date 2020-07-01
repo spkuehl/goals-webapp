@@ -7,9 +7,8 @@ from goals.models import Goal, GoalLog
 
 
 # GOAL LOG unit tests
-# Create GoalLog
 @pytest.mark.django_db
-def test_create_goallg(django_user_model):
+def test_create_goallog(django_user_model):
     user = django_user_model.objects.create(
         username='someone', password='password'
         )
@@ -31,7 +30,6 @@ def test_create_goallg(django_user_model):
     goal_log.save()
     assert len(GoalLog.objects.all()) == 1
 
-# Edit GoalLog
 # Archive GoalLog
 # Add GoalLog.start_time
 # Edit GoalLog.start_time
