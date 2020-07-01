@@ -16,12 +16,19 @@ def test_create_goallg(django_user_model):
     name = 'Creative Writing'
     description = 'Write creatively 3x a week for the next 3 months.'
     end_date = datetime.datetime.now() + datetime.timedelta(days=90)
+    goal = Goal(user=user,
+                name=name,
+                description=description,
+                end_date=end_date)
+    goal.save()
 
+    start_time = datetime.datetime.now()
+    end_time = datetime.datetime.now() + datetime.timedelta(hours=2)
     goal_log = GoalLog(goal=goal,
-                       name=name,
-                       description=description,
-                       end_date=end_date)
-    gogoal_logal.save()
+                       notes='some notes on how the log went.',
+                       start_time=start_time,
+                       end_time=end_time)
+    goal_log.save()
     assert len(GoalLog.objects.all()) == 1
 
 # Edit GoalLog
