@@ -59,6 +59,9 @@ class Goal(models.Model):
         self.archived = True
         self.save()
 
+    def __str__(self):
+        return '%s: %s' % (self.user, self.name)
+
 
 class GoalLog(models.Model):
     '''
