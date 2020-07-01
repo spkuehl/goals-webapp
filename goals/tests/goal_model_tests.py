@@ -3,7 +3,7 @@ import pytest
 import datetime
 
 from django.contrib.auth.models import User
-from .models import Goal, GoalLog
+from goals.models import Goal, GoalLog
 
 # Test User Model
 @pytest.mark.django_db
@@ -84,14 +84,3 @@ def test_archive_goal(django_user_model):
 
 
 # Get total duration (hours worked)
-
-# GOAL LOG unit tests
-# Create GoalLog
-# Edit GoalLog
-# Archive GoalLog
-# Add GoalLog.start_time
-# Edit GoalLog.start_time
-# Add GoalLog.end_time
-# Edit GoalLog.end_time
-# Get GoalLog duration == None if no start & end time.
-# Get GoalLog duration if start & end time.
