@@ -6,7 +6,7 @@ from .models import Goal, GoalLog
 class GoalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goal
-        fields = ['id', 'name', 'description', 'end_date',
+        fields = ['id', 'name', 'duration', 'description', 'end_date',
                   'progeress_check', 'progeress_check_time',
                   'reminder_notification', 'reminder_notification_time',
                   'active', 'archived']

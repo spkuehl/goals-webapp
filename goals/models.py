@@ -6,6 +6,8 @@ class Goal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=150)
+    duration = models.PositiveIntegerField(null=True, blank=True,
+                      help_text='Total Goal duration in hours.')
     end_date = models.DateField(null=True, blank=True)
 
     DAILY = 'DY'
