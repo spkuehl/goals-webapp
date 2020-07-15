@@ -41,6 +41,7 @@ class Goal(models.Model):
     active = models.BooleanField(default=True)
     archived = models.BooleanField(default=False)
 
+    @property
     def total_duration_complete(self):
         logs = GoalLog.objects.filter(goal=self)
         total_hours_list = [log.duration_complete for log in logs]
@@ -79,12 +80,13 @@ class GoalLog(models.Model):
     duration_direct_input = models.PositiveIntegerField(null=True, blank=True,
         help_text='Direclty input duration in minutes.')
 
+    @property
     def duration_complete(self):
         if self.duration_direct_input:
             return self.duration_direct_input
         elif self.start_time and self.end_time:
             dur = self.end_time - self.start_time
-            return dur.minutes
+            return (dur.total_seconds() % 3600) // 60
         else:
             return None
 
