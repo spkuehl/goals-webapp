@@ -87,3 +87,6 @@ class GoalLog(models.Model):
             return dur.minutes
         else:
             return None
+
+    def __str__(self):
+        return '%s: %s' % (self.goal.user, self.goal.name)
